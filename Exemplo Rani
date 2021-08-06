@@ -1,0 +1,77 @@
+<script>
+	import Menu from './Menu.svelte';
+	import Tabela2 from './Tabela2.svelte';
+	
+	var nome = "valença";
+	
+	function toUpperCase(text) {
+		text = text.toUpperCase()
+		return text
+	}
+	
+	nome = toUpperCase(nome)
+	
+	let exibirTabela = false;
+	function mostrar() {
+		exibirTabela = true;
+	}
+	function esconder() {
+		exibirTabela = false;
+	}
+	
+	let tabela2 = false
+	function gotoTabela2() {
+		tabela2 = true
+	}
+	
+</script>
+
+<style>
+	table, tr, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	th, td {
+		padding: 0.5em;
+	}
+	.cor {
+		color: rgb(200, 100, 20);
+	}
+</style>
+
+<Menu titulo="Hello"></Menu>
+<h1>Hello World</h1>
+<p class="cor">
+	lorem ipsum {nome}
+</p>
+
+<button on:click="{gotoTabela2}">
+	Ir para tabela 2
+</button>
+
+{#if tabela2 == true}
+	<Tabela2></Tabela2>
+{:else}
+	{#if exibirTabela == false}
+		<button on:click="{mostrar}">Mostrar tabela</button>
+	{:else}
+		<button on:click="{esconder}">Esconder tabela</button>
+	{/if}
+	{#if exibirTabela == true}
+		<table>
+			<tr class="cor">
+				<th>Nome</th>
+				<th>Sobrenome</th>
+			</tr>
+			<tr>
+				<td>Ranieri</td>
+				<td>Valença</td>
+			</tr>
+
+			<tr>
+				<td>Allan</td>
+				<td>Lima</td>
+			</tr>
+		</table>
+	{/if}
+{/if}
